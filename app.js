@@ -33,6 +33,10 @@ app.post("/campgrounds", function(req, res) {
   res.send("You hit the POST route!");
 });
 
+app.get("/campgrounds/new", function(req, res) {
+  res.render("new.ejs");
+});
+
 app.listen(process.env.PORT || 3000, function() {
   console.log("Server has started!");
 });
