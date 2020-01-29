@@ -7,28 +7,32 @@ mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
+//SCEMA SETUP
 var campgroundSchema = new mongoose.Schema({
   name: String,
-  image: String
+  image: String,
+  description: String
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema);
 
-// Campground.create(
-//   {
-//     name: "Salmon Creek",
-//     image:
-//       "https://images.fineartamerica.com/images-medium-large-5/1-a-view-of-the-ocean-from-inside-a-tent-rob-hammer.jpg"
-//   },
-//   function(err, campground) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log("NEWLY CREATED CAMPGROUND: ");
-//       console.log(campground);
-//     }
-//   }
-// );
+Campground.create(
+  {
+    name: "Salmon Creek",
+    image:
+      "https://images.fineartamerica.com/images-medium-large-5/1-a-view-of-the-ocean-from-inside-a-tent-rob-hammer.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+  function(err, campground) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("NEWLY CREATED CAMPGROUND: ");
+      console.log(campground);
+    }
+  }
+);
 
 app.get("/", function(req, res) {
   res.render("landing");
@@ -76,6 +80,10 @@ app.post("/campgrounds", function(req, res) {
 
 app.get("/campgrounds/new", function(req, res) {
   res.render("new.ejs");
+});
+
+app.get("/campgrounds/:id", function(req, res) {
+  res.send("THIS WILL BE THE SHOW PAGE ONE DAY!");
 });
 
 app.listen(process.env.PORT || 3000, function() {
