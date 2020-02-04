@@ -5,50 +5,14 @@ var express = require("express"),
   Campground = require("./models/campground"),
   seedDB = require("./seeds");
 
-seedDB();
-
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-
-// Campground.create(
-//   {
-//     name: "Salmon Creek",
-//     image:
-//       "https://images.fineartamerica.com/images-medium-large-5/1-a-view-of-the-ocean-from-inside-a-tent-rob-hammer.jpg",
-//     description:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-//   },
-//   function(err, campground) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log("NEWLY CREATED CAMPGROUND: ");
-//       console.log(campground);
-//     }
-//   }
-// );
+seedDB();
 
 app.get("/", function(req, res) {
   res.render("landing");
 });
-
-// var campgrounds = [
-//   {
-//     name: "Salmon Creek",
-//     image:
-//       "https://images.fineartamerica.com/images-medium-large-5/1-a-view-of-the-ocean-from-inside-a-tent-rob-hammer.jpg"
-//   },
-//   {
-//     name: "Granite Hill",
-//     image:
-//       "https://media.self.com/photos/5bcf8b52baeb4a5e6e13c899/4:3/w_1280,h_960,c_limit/tent-and-view.jpg"
-//   },
-//   {
-//     name: "Mountain Goat's Rest",
-//     image: "https://i.ytimg.com/vi/vfkhlLnSq7o/maxresdefault.jpg"
-//   }
-// ];
 
 //INDEX - SHOW ALL CAMPGROUNDS
 app.get("/campgrounds", function(req, res) {
@@ -82,13 +46,17 @@ app.get("/campgrounds/new", function(req, res) {
 
 //SHOW - SHOWS MORE INFO ABOUT ONE CAMPGROUND
 app.get("/campgrounds/:id", function(req, res) {
-  Campground.findById(req.params.id, function(err, foundCampground) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("show", { campground: foundCampground });
-    }
-  });
+  Campground.findById(req.params.id)
+    .populate("comments")
+    .exec(function(err, foundCampground) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(foundCampground);
+        //render show with that campground
+        res.render("show", { campground: foundCampground });
+      }
+    });
 });
 
 app.listen(process.env.PORT || 3000, function() {
