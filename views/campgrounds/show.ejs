@@ -10,24 +10,37 @@
       </div>
     </div>
     <div class="col-md-9">
-      <div class="thumbnail">
-        <img class="img-resposive" src="<%= campground.image%>" />
-        <div class="caption-full"><h4 class="pull-right">$9.00/night</h4></div>
+      <div class="figure">
+        <img
+          class="img-fluid"
+          src="<%= campground.image%>"
+          style="width: 100%;"
+        />
+        <div class="figure-caption">
+          <h4 class="float-right">$9.00/night</h4>
+          <h4><a href=""><%=campground.name%></a></h4>
+          <p><%=campground.description%></p>
+        </div>
+      </div>
+      <div class="card card-body bg-light">
+        <div class="text-right">
+          <a
+            class="btn btn-success mb-3"
+            href="/campgrounds/<%= campground._id%>/comments/new"
+            >Add New Comment</a
+          >
+        </div>
+        <%campground.comments.forEach(function(comment){ %>
+        <div class="row">
+          <div class="col-md-12">
+            <strong><%=comment.author%></strong>
+
+            <span class="float-right">10 days ago</span>
+            <p><%=comment.text%></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <h1><%=campground.name%></h1>
-
-  <p><%=campground.description%></p>
-  <p>
-    <a
-      class="btn btn-success"
-      href="/campgrounds/<%= campground._id%>/comments/new"
-      >Add New Comment</a
-    >
-  </p>
-
-  <%campground.comments.forEach(function(comment){ %>
-  <p><strong><%=comment.author%></strong> - <%=comment.text%></p>
 </div>
 <% }) %> <%- include("../partials/footer") %>
