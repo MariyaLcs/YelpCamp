@@ -3,11 +3,11 @@ var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
 
+//Root Route
 router.get("/", function(req, res) {
   res.render("landing");
 });
 
-//Auth Routes
 //Show register form
 router.get("/register", function(req, res) {
   res.render("register");
@@ -41,7 +41,7 @@ router.post(
   function(req, res) {}
 );
 
-//logout route
+//Logout route
 router.get("/logout", function(req, res) {
   req.logout();
   res.redirect("/campgrounds");
