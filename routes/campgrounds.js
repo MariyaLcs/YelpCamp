@@ -64,6 +64,13 @@ router.get("/:id", function(req, res) {
     });
 });
 
+//Edit Campground Route
+router.get("/:id/edit", function(req, res) {
+  res.send("EDIT CAMPGROUND ROUTE");
+});
+
+//Update Campground Route
+
 //Middleware
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
