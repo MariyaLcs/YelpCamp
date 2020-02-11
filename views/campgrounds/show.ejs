@@ -30,10 +30,11 @@
             >Add New Comment</a
           >
         </div>
-        <%campground.comments.forEach(function(comment){ %>
+
         <div class="row">
+          <%campground.comments.forEach(function(comment){ %>
           <div class="col-md-12">
-            <strong><%=comment.author%></strong>
+            <strong><%=comment.author.username%></strong>
             <span class="float-right">10 days ago</span>
             <p><%=comment.text%></p>
           </div>
