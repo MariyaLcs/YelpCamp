@@ -36,11 +36,15 @@ app.get("/", function(req, res) {
 
 //INDEX - SHOW ALL CAMPGROUNDS
 app.get("/campgrounds", function(req, res) {
+  //Get all campgroungs from DB
   Campground.find({}, function(err, allCampgrounds) {
     if (err) {
       console.log(err);
     } else {
-      res.render("campgrounds/index", { campgrounds: allCampgrounds });
+      res.render("campgrounds/index", {
+        campgrounds: allCampgrounds,
+        currentUser: req.user
+      });
     }
   });
 });
@@ -95,7 +99,7 @@ app.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res) {
   });
 });
 
-app.post("/campgrounds/:id/comments", function(req, res) {
+app.post("/campgrounds/:id/comments", isLoggedIn, function(req, res) {
   //lookup campground using ID
   Campground.findById(req.params.id, function(err, campground) {
     if (err) {
