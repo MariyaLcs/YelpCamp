@@ -1,14 +1,14 @@
 <%- include("../partials/header") %>
 <div class="container">  
-  <h1 class="text-center">Add New Comment to <%= campground.name%></h1>
+  <h1 class="text-center">Edit comment</h1>
   <div class="row"></div>
     <div class="my-3 mx-auto " style="width: 50%;" >
-      <form action="/campgrounds/<%= campground._id%>/comments" method="post">
+      <form action="/campgrounds/<%= campground_id%>/comments/<%= comment._id%>?_method=PUT" method="post">
         <div class="form-group ">
           <input
             class="form-control"
             type="text"
-            placeholder="text"
+            value="<%= comment.text%>"
             name="comment[text]"
           />
         </div>
