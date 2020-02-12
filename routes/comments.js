@@ -69,6 +69,11 @@ router.put("/:comment_id", function(req, res) {
   });
 });
 
+//Comment Destroy Route
+router.delete("/:comment_id", function(req, res) {
+  res.send("Delete route!");
+});
+
 //Middleware
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
