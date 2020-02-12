@@ -56,7 +56,7 @@ router.get("/:comment_id/edit", checkCommentOwnership, function(req, res) {
 });
 
 //Comment Update
-router.put("/:comment_id", function(req, res) {
+router.put("/:comment_id", checkCommentOwnership, function(req, res) {
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(
     err,
     updatedComment
@@ -70,7 +70,7 @@ router.put("/:comment_id", function(req, res) {
 });
 
 //Comment Destroy Route
-router.delete("/:comment_id", function(req, res) {
+router.delete("/:comment_id", checkCommentOwnership, function(req, res) {
   Comment.findByIdAndRemove(req.params.comment_id, function(err) {
     if (err) {
       res.redirect("back");
