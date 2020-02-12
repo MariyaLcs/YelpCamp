@@ -93,7 +93,13 @@ router.put("/:id", function(req, res) {
 
 //Destroy Campground Route
 router.delete("/:id", function(req, res) {
-  res.send("You are trying to delete something!");
+  Campground.findByIdAndRemove(req.params.id, function(err) {
+    if (err) {
+      res.redirect("/campgrounds");
+    } else {
+      res.redirect("/campgrounds");
+    }
+  });
 });
 
 //Middleware
