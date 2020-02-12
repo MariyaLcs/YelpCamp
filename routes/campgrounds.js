@@ -85,10 +85,15 @@ router.put("/:id", function(req, res) {
     if (err) {
       res.redirect("/campgrounds");
     } else {
+      //redirect somewhere (show page)
       res.redirect("/campgrounds/" + req.params.id);
     }
   });
-  //redirect somewhere (show page)
+});
+
+//Destroy Campground Route
+router.delete("/:id", function(req, res) {
+  res.send("You are trying to delete something!");
 });
 
 //Middleware
