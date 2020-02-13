@@ -12,6 +12,7 @@ router.get("/", function(req, res) {
 router.get("/register", function(req, res) {
   res.render("register");
 });
+
 //handle sign up logic
 router.post("/register", function(req, res) {
   var newUser = new User({ username: req.body.username });
@@ -44,6 +45,7 @@ router.post(
 //Logout route
 router.get("/logout", function(req, res) {
   req.logout();
+  req.flash("success", "Logged you out!");
   res.redirect("/campgrounds");
 });
 
