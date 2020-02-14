@@ -20,7 +20,7 @@ var commentRoutes = require("./routes/comments"),
 mongoose
   .connect(
     "mongodb+srv://dbUser:123@cluster0-upvye.mongodb.net/test?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useCreateIndex: true }
+    { useNewUrlParser: true }
   )
   .then(() => {
     console.log("Connected to DB");
