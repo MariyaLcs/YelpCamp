@@ -5,66 +5,69 @@
       <p class="lead">YelpCamp</p>
     </div>
     <div class="col-md-9">
-      <div class="figure">
-        <img
-          class="img-fluid"
-          src="<%= campground.image%>"
-          style="width: 100%;"
-        />
-        <div class="figure-caption">
-          <h4 class="float-right">$<%=campground.price%>/night</h4>
-          <h4><a href=""><%=campground.name%></a></h4>
-          <p><%=campground.description%></p>
-          <p><em>Submitted by <%=campground.author.username%></em></p>
-          <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
-          <a
-            href="/campgrounds/<%=campground._id%>/edit"
-            class="btn btn-warning"
-            >Edit</a
-          >
-          <form
-            class="d-inline"
-            action="/campgrounds/<%=campground._id%>?_method=DELETE"
-            method="post"
-          >
-            <button class="btn btn-danger">Delete</button>
-          </form>
-          <% } %>
-        </div>
-      </div>
-      <div class="card card-body bg-light mt-3">
-        <div class="text-right">
-          <a
-            class="btn btn-success mb-3"
-            href="/campgrounds/<%=campground._id%>/comments/new"
-            >Add New Comment</a
-          >
-        </div>
-        <% campground.comments.forEach(function(comment){ %>
-        <div class="row">
-          <div class="col-md-12">
-            <strong><%= comment.author.username %></strong>
-            <span class="float-right">10 days ago</span>
-            <p><%= comment.text %></p>
-            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+      <div class="card">
+        <div class="card-body bg-light">
+          <img class="img-fluid rounded" src="<%= campground.image%>" />
+          <div class="my-3" alt="<%=campground.name%>">
+            <h4 class="float-right">$<%=campground.price%>/night</h4>
+            <h4><a href=""><%=campground.name%></a></h4>
+            <br />
+            <p><%=campground.description%></p>
+            <p><em>Submitted by <%=campground.author.username%></em></p>
+            <% if(currentUser && campground.author.id.equals(currentUser._id)){
+            %>
             <a
-              href="/campgrounds/<%=campground._id%>/comments/<%= comment._id%>/edit"
-              class="btn btn-warning btn-sm"
+              href="/campgrounds/<%=campground._id%>/edit"
+              class="btn btn-warning"
               >Edit</a
             >
             <form
               class="d-inline"
-              action="/campgrounds/<%=campground._id%>/comments/<%= comment._id%>?_method=DELETE"
+              action="/campgrounds/<%=campground._id%>?_method=DELETE"
               method="post"
             >
-              <button class="btn btn-danger btn-sm">Delete</button>
+              <button class="btn btn-danger">Delete</button>
             </form>
             <% } %>
           </div>
         </div>
-        <% }) %>
+      </div>
+      <div class="card">
+        <div class="card-body bg-light">
+          <div class="text-right">
+            <a href="/campgrounds/<%=campground._id%>/comments/new"
+              >Add New Comment</a
+            >
+          </div>
+
+          <% campground.comments.forEach(function(comment){ %>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <strong><%= comment.author.username %></strong>
+              <span class="float-right">10 days ago</span>
+              <p><%= comment.text %></p>
+              <% if(currentUser && comment.author.id.equals(currentUser._id)){
+              %>
+              <a
+                href="/campgrounds/<%=campground._id%>/comments/<%= comment._id%>/edit"
+                class="btn btn-warning btn-sm"
+                >Edit</a
+              >
+              <form
+                class="d-inline"
+                action="/campgrounds/<%=campground._id%>/comments/<%= comment._id%>?_method=DELETE"
+                method="post"
+              >
+                <button class="btn btn-danger btn-sm">Delete</button>
+              </form>
+
+              <% } %>
+            </div>
+          </div>
+          <% }) %>
+        </div>
       </div>
     </div>
   </div>
+  <%- include("../partials/footer") %>
 </div>
-<%- include("../partials/footer") %>
