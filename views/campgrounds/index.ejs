@@ -1,29 +1,40 @@
 <%- include("../partials/header") %>
 
 <div class="container">
-  <header class="jumbotron">
+  <header class="jumbotron my-1 py-3">
     <h1>Welcome to YelpCamp!</h1>
     <p>View our hand-picked campgrounds from all over the world</p>
     <p>
-      <a class="btn btn-primary btn-lg" href="/campgrounds/new"
-        >Add new Campground</a
-      >
+      <a class="btn btn-success" href="/campgrounds/new">Add new Campground</a>
+    </p>
+    <p>
+      <form action="/campgrounds" class="form-inline" method="get">
+      <div class="form-group">
+        <input class="form-control" type="text" name="search" placeholder="Campground search...">
+      </div>
+      </form>
     </p>
   </header>
-</div>
-<div class="container d-flex justify-content-around">
-  <div class="card" style="width: 52rem; ">
-    <% campgrounds.forEach(function(campground){ %>
-    <img src="<%= campground.image %>" class="card-img-top" alt="..." />
-    <div class="card-body">
-      <h5 class="card-title"><%= campground.name %></h5>
-      <p>
-        <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary"
-          >More Info</a
-        >
-      </p>
-    </div>
 
+  <div class="row text-center">
+    <% campgrounds.forEach(function(campground){ %>
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div class="card">
+        <img
+          src="<%= campground.image %>"
+          class="card-img-top"
+          alt="<%= campground.name %>"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><%= campground.name %></h5>
+          <p>
+            <a href="/campgrounds/<%= campground._id %>" class="btn btn-success"
+              >More Info</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
     <% }); %>
   </div>
 </div>

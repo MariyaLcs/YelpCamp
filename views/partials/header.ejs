@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Yelp Camp</title>
-    <link rel="stylesheet" href="/public/stylesheets/main.css">
+    <link rel="stylesheet" href="/YelpCamp/public/stylesheets/main.css">
 
     <!-- Bootstrap CSS -->
     <link
@@ -50,6 +50,7 @@
         </ul>
       </div>
     </nav>
+
     <div class="container mt-3">
       <% if(error && error.length > 0){ %>
       <div class="alert alert-danger" role="alert">
@@ -61,7 +62,6 @@
         <%= success %>
       </div>
       <% } %>
-    </div>
-    
+    </div>    
     
 </html>
